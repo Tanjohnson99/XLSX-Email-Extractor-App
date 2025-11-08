@@ -3,19 +3,147 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Email Extractor</title>
+  <title>DataPilot Workspace</title>
   <script src="xlsx.full.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Email Extractor</h1>
-    <div class="input-container">
-      <input type="file" id="fileInput" class="choose-files" multiple>
-      <button class="button" id="downloadButton">Download Emails as TXT</button>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+      <div class="brand">
+        <div class="brand-logo">DP</div>
+        <div class="brand-meta">
+          <span class="brand-name">DataPilot</span>
+          <span class="brand-plan">Automation Suite</span>
+        </div>
+      </div>
+      <nav class="sidebar-nav" aria-label="Product tabs">
+        <button class="nav-item active" data-target="email-extractor" aria-current="page">
+          <span class="nav-icon">📧</span>
+          <div class="nav-text">
+            <span class="nav-title">Email Extractor</span>
+            <span class="nav-subtitle">Parse XLSX contacts</span>
+          </div>
+        </button>
+        <button class="nav-item" data-target="coming-soon">
+          <span class="nav-icon">⚙️</span>
+          <div class="nav-text">
+            <span class="nav-title">Automation Builder</span>
+            <span class="nav-subtitle">Coming soon</span>
+          </div>
+        </button>
+        <button class="nav-item" data-target="insights">
+          <span class="nav-icon">📊</span>
+          <div class="nav-text">
+            <span class="nav-title">Insights</span>
+            <span class="nav-subtitle">Coming soon</span>
+          </div>
+        </button>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="footer-card">
+          <p class="footer-eyebrow">Need more automations?</p>
+          <p class="footer-copy">Upgrade to Pro to unlock workflows, team collaboration and API sync.</p>
+          <button class="footer-action">Upgrade plan</button>
+        </div>
+      </div>
+    </aside>
+
+    <div class="mobile-bar">
+      <button class="hamburger" id="hamburger" aria-controls="sidebar" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="mobile-title">DataPilot Workspace</div>
     </div>
-    <div id="emailsContainer"></div>
+
+    <main class="main-content" id="mainContent">
+      <header class="top-bar">
+        <div>
+          <p class="top-bar-eyebrow">Workspace</p>
+          <h1 class="top-bar-title">Welcome back, Sophie</h1>
+          <p class="top-bar-subtitle">Choose an automation product to get started.</p>
+        </div>
+        <div class="top-bar-actions">
+          <button class="pill-button">Invite teammates</button>
+          <div class="avatar">SC</div>
+        </div>
+      </header>
+
+      <section class="panel active" id="email-extractor" aria-labelledby="email-extractor-title">
+        <div class="panel-header">
+          <div>
+            <h2 id="email-extractor-title">Email Extraction</h2>
+            <p>Upload one or multiple Excel spreadsheets to harvest all discoverable email addresses.</p>
+          </div>
+          <div class="panel-metrics">
+            <div class="metric">
+              <span class="metric-label">Emails extracted</span>
+              <span class="metric-value" id="emailCount">0</span>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Last run</span>
+              <span class="metric-value">Just now</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cards-grid">
+          <div class="card upload-card">
+            <div class="card-header">
+              <h3>Upload your data</h3>
+              <p>Supported formats: <strong>.xlsx</strong></p>
+            </div>
+            <label for="fileInput" class="upload-dropzone">
+              <input type="file" id="fileInput" class="sr-only" multiple accept=".xlsx">
+              <div class="dropzone-inner">
+                <div class="dropzone-icon">⬆️</div>
+                <p class="dropzone-title">Drop files here or click to browse</p>
+                <p class="dropzone-subtitle">We'll process each spreadsheet and collect unique email addresses.</p>
+              </div>
+            </label>
+            <div class="upload-actions">
+              <button class="secondary-button" type="button" id="clearButton">Clear results</button>
+              <button class="primary-button" type="button" id="downloadButton" disabled>Download emails (.txt)</button>
+            </div>
+          </div>
+
+          <div class="card results-card">
+            <div class="card-header">
+              <h3>Extracted emails</h3>
+              <p class="card-subtitle">Review the deduplicated list before exporting.</p>
+            </div>
+            <div id="emailsContainer" class="email-list">
+              <div class="empty-state">
+                <h4>No runs yet</h4>
+                <p>Upload one or more Excel files to see the extracted addresses.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="coming-soon" aria-labelledby="coming-soon-title">
+        <div class="empty-panel">
+          <h2 id="coming-soon-title">Automation Builder</h2>
+          <p>Design end-to-end workflows, connect APIs and trigger events — available soon.</p>
+        </div>
+      </section>
+
+      <section class="panel" id="insights" aria-labelledby="insights-title">
+        <div class="empty-panel">
+          <h2 id="insights-title">Insights</h2>
+          <p>Track automation performance and customer engagement metrics — coming soon.</p>
+        </div>
+      </section>
+    </main>
   </div>
+
+  <div class="sidebar-backdrop" id="sidebarBackdrop" hidden></div>
   <script src="script.js"></script>
 </body>
 </html>
